@@ -103,10 +103,18 @@ class TunnelAPI {
 
 		try {
 			JSONObject body = new JSONObject(responseContent);
+			System.out.println("//=====================================//");
+			System.out.println(body);
 			if (body.getInt("code") != 0) {
 				throw new Exception(String.format("信道服务调用失败：#%d - %s", body.get("code"), body.get("message")));
 			}
-			return body.has("data") ? new JSONObject(body.getString("data")) : null;
+			/**
+			 * @FANG Ge
+			 * 在返回无效信道的时候data字段返回的是JSON对象，而请求信道的时候却为JSON格式字符串
+			 * 在这里将body.getString("data")改为body.get("data").toString()可以暂时解决这个问题
+			 * 但是对于JSON对象的话，可能会因为对象转成了字符串再转换成对象，而造成的一些运算冗余
+			 */
+			return body.has("data") ? new JSONObject(body.get("data").toString()) : null;
 		} catch (JSONException e) {
 			throw new Exception("信道服务器响应格式错误，无法解析 JSON 字符串", e);
 		}

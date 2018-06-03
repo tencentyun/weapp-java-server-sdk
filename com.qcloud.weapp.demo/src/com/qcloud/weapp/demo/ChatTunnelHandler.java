@@ -44,7 +44,7 @@ public class ChatTunnelHandler implements TunnelHandler {
 	 * */
 	@Override
 	public void onTunnelRequest(Tunnel tunnel, UserInfo userInfo) {
-		if (tunnel.getTunnelId() == "test") {
+		if (tunnel.getTunnelId().equels("test")) {
 			userInfo = new UserInfo();
 		}
 		if (userInfo != null) {

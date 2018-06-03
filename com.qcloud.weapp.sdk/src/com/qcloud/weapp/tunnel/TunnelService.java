@@ -70,10 +70,10 @@ public class TunnelService {
 	 * @param options 指定信道服务的配置
 	 */
 	public void handle(TunnelHandler handler, TunnelHandleOptions options) throws ConfigurationException {
-		if (request.getMethod().toUpperCase() == "GET") {
+		if (request.getMethod().toUpperCase().equals("GET")) {
 			handleGet(handler, options);
 		}
-		if (request.getMethod().toUpperCase() == "POST") {
+		if (request.getMethod().toUpperCase().equals("POST")) {
 			handlePost(handler, options);
 		}
 	}
